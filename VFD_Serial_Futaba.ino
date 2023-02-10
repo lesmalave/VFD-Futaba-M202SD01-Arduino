@@ -1,204 +1,209 @@
-// Code worked for VFD Futaba M202SD01LJ
+// Code worked for vfd Futaba M202SD01LJ
 // Luis Malavé 2018 @lesmalave @e_smartlabs (twitter & Instagram)
 // luisbmalave@gmail.com
 
-#include <SoftwareSerial.h>
-SoftwareSerial VFD(2, 3); // (rx, tx) Only connect the TX pin of the arduino to the RX pin of the display
+#include "VfdUart.h""
 
-void setup() {
-  VFD.begin(9600); // Serial port is set to 9600 bauds supported by VFD
-  VFDreset();
-  VFDclear();
+
+void setup()
+{
+  vfd.begin(9600); // Serial port is set to 9600 bauds supported by vfd
+  vfdreset();
+  vfdclear();
 }
 
-void loop() {
-  setCursor(3); // 4 position on VFD
-  cursormode(88); //Cursor mode BLINKING
+void loop()
+{
+  setCursor(3);   // 4 position on vfd
+  cursormode(88); // Cursor mode BLINKING
   delay(4000);
-  //cursormode(0);
-  VFDhorizontaltab();
+  // cursormode(0);
+  vfdhorizontaltab();
   setCursor(4);
-  VFD.write("W");
+  vfd.write("W");
   delay(200);
-  VFD.write("e");
+  vfd.write("e");
   delay(200);
-  VFD.write("l");
+  vfd.write("l");
   delay(200);
-  VFD.write("c");
+  vfd.write("c");
   delay(200);
-  VFD.write("o");
+  vfd.write("o");
   delay(200);
-  VFD.write("m");
+  vfd.write("m");
   delay(200);
-  VFD.write("e");
+  vfd.write("e");
   delay(300);
-  VFD.write(" ");
+  vfd.write(" ");
   delay(200);
-  VFD.write("t");
+  vfd.write("t");
   delay(200);
-  VFD.write("o");
+  vfd.write("o");
   delay(200);
-  VFD.write(" ");
+  vfd.write(" ");
   delay(200);
   setCursor(23); // 2nd line
-  VFD.write("e");
+  vfd.write("e");
   delay(200);
-  VFD.write(" ");
+  vfd.write(" ");
   delay(200);
-  VFD.write("S");
+  vfd.write("S");
   delay(200);
-  VFD.write("m");
+  vfd.write("m");
   delay(200);
-  VFD.write("a");
+  vfd.write("a");
   delay(200);
-  VFD.write("r");
+  vfd.write("r");
   delay(200);
-  VFD.write("t");
+  vfd.write("t");
   delay(200);
-  VFD.write(" ");
+  vfd.write(" ");
   delay(200);
-  VFD.write("L");
+  vfd.write("L");
   delay(200);
-  VFD.write("a");
+  vfd.write("a");
   delay(200);
-  VFD.write("b");
+  vfd.write("b");
   delay(200);
-  VFD.write("s");
+  vfd.write("s");
   delay(2000);
 
-  cursormode(255); //Cursor mode LIGHT
+  cursormode(255); // Cursor mode LIGHT
 
-  for (int positionCounter = 0; positionCounter < 40; positionCounter++) {
-    VFDbackspace (); // Clear the display to the left counting from position 40 to position 0
+  for (int positionCounter = 0; positionCounter < 40; positionCounter++)
+  {
+    vfdbackspace(); // Clear the display to the left counting from position 40 to position 0
     delay(50);
   }
-  cursormode(0); //Cursor mode NO LIGHT
+  cursormode(0); // Cursor mode NO LIGHT
 
-  VFDclear();
+  vfdclear();
 
   setCursor(1); // 1st line
-  VFD.print("Using VFD Serial");
+  vfd.print("Using vfd Serial");
   setCursor(21); // 2nd line
-  VFD.print("FUTABA M202SD01LJ");
+  vfd.print("FUTABA M202SD01LJ");
   delay(2000);
-  VFDclear();
+  vfdclear();
   setCursor(1);
-  VFD.print("    Now a sample ");
+  vfd.print("    Now a sample ");
   setCursor(20);
-  VFD.print("    Dimmer control ");
+  vfd.print("    Dimmer control ");
 
-  for (int i = 0; i < 3; i++) { // Turn the display on and off 3 times (function "for")
-    VFDdimmer(0);
+  for (int i = 0; i < 3; i++)
+  { // Turn the display on and off 3 times (function "for")
+    vfddimmer(0);
     delay(250);
-    VFDdimmer(255);
+    vfddimmer(255);
     delay(800);
   }
   delay(2000);
-  VFDclear();
-  VFDdimmer(20); // dimmer 20%
+  vfdclear();
+  vfddimmer(20); // dimmer 20%
   setCursor(4);
-  VFD.print("20% Dimmer");
+  vfd.print("20% Dimmer");
   delay(500);
-  VFDclear();
-  VFDdimmer(40);
+  vfdclear();
+  vfddimmer(40);
   setCursor(4);
-  VFD.print("40% Dimmer");
+  vfd.print("40% Dimmer");
   delay(500);
-  VFDclear();
-  VFDdimmer(60);
+  vfdclear();
+  vfddimmer(60);
   setCursor(4);
-  VFD.print("60% Dimmer");
+  vfd.print("60% Dimmer");
   delay(500);
-  VFDclear();
-  VFDdimmer(80);
+  vfdclear();
+  vfddimmer(80);
   setCursor(4);
-  VFD.print("80% Dimmer");
+  vfd.print("80% Dimmer");
   delay(500);
-  VFDclear();
+  vfdclear();
   setCursor(4);
-  VFDdimmer(100);
-  VFD.print("100% Dimmer");
+  vfddimmer(100);
+  vfd.print("100% Dimmer");
   delay(500);
-  VFDclear();
+  vfdclear();
 
   setCursor(1);
-  VFD.print("Display Characters");
+  vfd.print("Display Characters");
   setCursor(24);
-  VFD.print("Code Fonts");
+  vfd.print("Code Fonts");
   delay(1000);
-  VFDclear();
-  VFDreset();
-  VFDchars(); // display the characters from 21 to 255
-  VFDclear();
+  vfdclear();
+  vfdreset();
+  vfdchars(); // display the characters from 21 to 255
+  vfdclear();
 
-  for (int i = 0; i < 80; i++) { // function that runs a character across the VFD  
+  for (int i = 0; i < 80; i++)
+  { // function that runs a character across the vfd
     setCursor(i);
-    VFD.write(0xF4); //I got funny symbol with the Datasheet
+    vfd.write(0xF4); // I got funny symbol with the Datasheet
     delay(100);
     setCursor(i);
-    VFD.print(" ");
+    vfd.print(" ");
   }
-  VFDclear();
+  vfdclear();
   setCursor(0);
-  VFD.print("Follow us  Instagram");
+  vfd.print("Follow us  Instagram");
   setCursor(9);
-  VFD.write(0xF7); // arrow symbol obtained with the datasheet
+  vfd.write(0xF7); // arrow symbol obtained with the datasheet
   setCursor(24);
-  VFD.print("@e_Smartlabs");
+  vfd.print("@e_Smartlabs");
   delay(5000);
-  VFDclear();
+  vfdclear();
   setCursor(0);
-  VFD.print("Follow us   twitter");
+  vfd.print("Follow us   twitter");
   setCursor(9);
-  VFD.write(0xF7); //right arrow symbol
+  vfd.write(0xF7); // right arrow symbol
   setCursor(24);
-  VFD.print("@e_Smartlabs");
+  vfd.print("@e_Smartlabs");
   delay(5000);
-  VFDclear();
+  vfdclear();
   setCursor(1);
-  VFD.print("What is your code?");
+  vfd.print("What is your code?");
   delay(5000);
   setCursor(1); // This achieves delete characters to the right
-  VFD.write(" ");
+  vfd.write(" ");
   delay(50);
-  VFD.write(" ");
+  vfd.write(" ");
   delay(50);
-  VFD.write(" ");
+  vfd.write(" ");
   delay(50);
-  VFD.write(" ");
+  vfd.write(" ");
   delay(50);
-  VFD.write(" ");
+  vfd.write(" ");
   delay(50);
-  VFD.write(" ");
+  vfd.write(" ");
   delay(50);
-  VFD.write(" ");
+  vfd.write(" ");
   delay(50);
-  VFD.write(" ");
+  vfd.write(" ");
   delay(50);
-  VFD.write(" ");
+  vfd.write(" ");
   delay(50);
-  VFD.write(" ");
+  vfd.write(" ");
   delay(50);
-  VFD.write(" ");
+  vfd.write(" ");
   delay(50);
-  VFD.write(" ");
+  vfd.write(" ");
   delay(50);
-  VFD.write(" ");
+  vfd.write(" ");
   delay(50);
-  VFD.write(" ");
+  vfd.write(" ");
   delay(50);
-  VFD.write(" ");
+  vfd.write(" ");
   delay(50);
-  VFD.write(" ");
+  vfd.write(" ");
   delay(50);
-  VFD.write(" ");
+  vfd.write(" ");
   delay(50);
-  VFD.write(" ");
+  vfd.write(" ");
   delay(1000);
   setCursor(3);
-  VFD.print("VFD Serial UART");
+  vfd.print("vfd Serial UART");
   setCursor(22);
-  VFD.print("FUTABA M202SD01LJ");
+  vfd.print("FUTABA M202SD01LJ");
   delay(20000);
-  VFDclear();
+  vfdclear();
 }
